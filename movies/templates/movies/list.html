@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-6"  style="color: white;">
+                <h4><a href="{% url 'movies:actor_detail' pref_actor.pk %}" class="badge badge-warning">배우 "{{ pref_actor.name }}" 영화 추천</a></h4>
+                <div>
+                    <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel" style="width: 300px; height: 400px">
+                        <div class="carousel-inner">
+                        {% for actor_reco_movie in actor_reco_movies %}
+                            {% if forloop.counter == 1 %}
+                                <div class="carousel-item active">
+                            {% else %}
+                                <div class="carousel-item">
+                            {% endif %}
+                                <a href="{% url 'movies:detail' actor_reco_movie.pk %}">
+                                    <img src="{{ actor_reco_movie.poster_url }}" class="d-block" width="300px" height="400px" alt="{{ actor_reco_movie.title }}" height="409">
+                                </a>
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                                </div>
+                        {% endfor %}
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col-6"  style="color: white;">
+            <h4><a href="{% url 'movies:genre_detail' pref_genre.pk %}" class="badge badge-warning">"{{ pref_genre.name }}" 영화 추천</a></h4>
+                <div id="carouselExampleCaptions2" class="carousel slide" data-ride="carousel" style="width: 300px; height: 400px">
+                    <div class="carousel-inner">
+                    {% for genre_reco_movie in genre_reco_movies %}
+                        {% if forloop.counter == 1 %}
+                            <div class="carousel-item active">
+                        {% else %}
+                            <div class="carousel-item">
+                        {% endif %}
+                            <a href="{% url 'movies:detail' genre_reco_movie.pk %}">
+                                <img src="{{ genre_reco_movie.poster_url }}" class="d-block" width="300px" height="400px" alt="{{ genre_reco_movie.title }}" height="409">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                            </div>
+                            </div>
+                            {% endfor %}
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions2" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions2" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        {% if result_list|length != 0 %}
+            <div class="col-6">
+                <h4><a class="badge badge-warning">사용자 선호 기반 추천</a></h4>
+                    <div id="carouselExampleCaptions2" class="carousel slide" data-ride="carousel" style="width: 300px; height: 400px">
+                        <div class="carousel-inner">
+                        {% for result_movie in result_list %}
+                            {% if forloop.counter == 1 %}
+                                <div class="carousel-item active">
+                            {% else %}
+                                <div class="carousel-item">
+                            {% endif %}
+                                <a href="{% url 'movies:detail' result_movie.pk %}">
+                                    <img src="{{ result_movie.poster_url }}" class="d-block" width="300px" height="400px" alt="{{ result_movie.title }}" height="409">
+                                </a>
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions2" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions2" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+        {% endif %}
+{% endblock %}

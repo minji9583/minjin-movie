@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <h3 style="color: white;">"{{ query }}" 검색 결과</h3>
+        {% if searchResult|length == 0 %}
+            <h5 style="color: white;" class="text-center mt-5">검색 결과를 찾을 수 없습니다.</h5>
+        {% else %}
+            {% for result in searchResult %}
+                <!--<p style="color: white;">{{ result.title }}</p>-->
+                <a href="{% url 'movies:detail' result.pk %}"><img src="{{ result.poster_url }}" height="400px" width="300px"></a>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

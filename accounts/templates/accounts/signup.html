@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <form method="POST"  style="color: white;">
+            {% csrf_token %}
+            <form class="needs-validation" novalidate>
+              <div class="form-group">
+                <label for="userform" name="username" style="color:white;">User Name</label>
+                <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User Name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="color:white;">Password</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+                <input id="color_input" type="hidden" name="bgc" value="linear-gradient(to bottom right, #000000 0%, #800080 75%)">
+              
+            <!--placeholder="Enter email"-->
+
+<!--https://mdbootstrap.com/docs/jquery/forms/validation/-->
+            <div class="form-group">
+                <div class="container">
+                    <div class="row">
+                        <!--<select name="bgc">-->
+                            <div class="col square1" onclick="change1();" class="form-check-input" value="purple" >purple</div>
+                            <div class="col square2" onclick="change2();" class="form-check-input" value="sky">sky</div>
+                            <div class="col square3" onclick="change3();" class="form-check-input" value="pink">pink</div>
+                            <div class="col square4" onclick="change4();" class="form-check-input" value="green">green</div>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="button submit" class="btn btn-light">Sign Up</button>
+        </form>
+        </div>
+{% endblock %}
+{% block script %}
+
+    <script>
+        function change1() {
+            const color = "linear-gradient(to bottom right, #000000 0%, #800080 75%)"
+            document.getElementById('bodyImage').style.backgroundImage = color
+            document.querySelector('#color_input').value = color
+            console.log(document.querySelector('#color_input').value)
+        }
+        function change2() {
+            const color = "linear-gradient(to bottom right, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)"
+            document.getElementById('bodyImage').style.backgroundImage = color
+            document.querySelector('#color_input').value = color
+            console.log(document.querySelector('#color_input').value)
+        }
+        function change3() {
+            const color = "linear-gradient(to bottom right, #f54ea2 0, #ff7676 100%)"
+            document.getElementById('bodyImage').style.backgroundImage = color
+            document.querySelector('#color_input').value = color
+            console.log(document.querySelector('#color_input').value)
+        }
+        function change4() {
+            const color = "linear-gradient(to bottom right, seagreen  0%,  yellowgreen 100%)"
+            document.getElementById('bodyImage').style.backgroundImage = color
+            document.querySelector('#color_input').value = color
+            console.log(document.querySelector('#color_input').value)
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,72 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    height: 300VH;
+    background-size: cover;
+    color: white;
+}
+
+#bodyImage {
+    /*width: 300px;*/
+    /*height: 300px;*/
+    font-family:'Rubik', sans-serif;
+    background-image : none; 
+}
+
+#basic_color {
+    background-color: rgba(255, 255, 255, 0);
+}
+.navbar {
+    background-image: rgba(0, 0, 0, 0.0);
+}
+
+.square1 {
+    width: 50px;
+    height: 100px;
+    margin: 30px 30px 30px 30px;
+    background-image: linear-gradient(to bottom right, #000000 0%, #800080 75%);
+
+}
+
+.square2 {
+    width: 50px;
+    height: 100px;
+    margin: 30px 30px 30px 30px;
+    background-image: linear-gradient(to bottom right, #2cb5e8 0%, #1fc8db 50%, #9fb8ad 80%);
+}
+
+.square3 {
+    width: 100px;
+    height: 100px;
+    margin: 30px 30px 30px 30px;
+    background-image: linear-gradient(to bottom right, #f54ea2 0, #ff7676 100%);
+}
+
+.square4 {
+    width: 100px;
+    height: 100px;
+    margin: 30px 30px 30px 30px;
+    background-image: linear-gradient(to bottom right, seagreen  0%,  yellowgreen 100%);
+}
+input[type=range] {
+    width: 100%;
+}
+.customizing input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: #2497E3;
+}
+.customizing input[type=range]::-webkit-slider-thumb {
+    border: 1px solid #2497E3;
+    height: 15px;
+    width: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px; 
+}
+.customizing input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #2497E3; 
+}

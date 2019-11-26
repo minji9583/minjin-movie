@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+        {% for m in movie_list.values %}
+            <div class="col-4">
+                <div class="card my-3" style="width: 18rem;">
+                  <div class="card-header">
+                    {% if forloop.counter == 1 %}
+                        <b  style="color: gold;">No. {{ forloop.counter }}</b>
+                    {% elif forloop.counter == 2 %}
+                        <b  style="color: silver;">No. {{ forloop.counter }}</b>
+                    {% elif forloop.counter == 3 %}
+                        <b  style="color: rgba(205, 127, 50);">No. {{ forloop.counter }}</b>
+                    {% else %}
+                        <b style="color: black;">No. {{ forloop.counter }}</b>
+                    {% endif %}
+                  </div>
+                  {% if m.id != 0 %}
+                      <a href="{% url 'movies:detail' m.id.id %}"><img src="{{ m.img_path }}" class="card-img-top" alt=""  height="409"></a>
+                  {% else %}
+                      <img src="{{ m.img_path }}" class="card-img-top" alt="">
+                  {% endif %}
+                  <div class="card-body" style="color: black;">
+                    <h5 class="card-title">{{ m.title }}</h5>
+                    <p class="card-text">예매율 : {{ m.share }} %</p>
+                    <p class="card-text">누적 관객 : {{ m.amt }} 명</p>
+                    <p class="card-text">개봉일 : {{ m.opening }}</p>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

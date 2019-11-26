@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container" style='color:white;'>
+    <div class="row">
+        <div class="col-6"><h2>{{target_user.username}} Page</h2>
+        </div>
+        {% if user != target_user %}
+            <a href="{% url 'accounts:follow' target_user.pk %}" style="color: white" class="btn btn-outline-dark follow-button" role="button">팔로우</a>
+        {% endif %}
+        <div class="col-4 d-flex align-items-center">
+            <div>
+            <span>팔로잉 {{target_user.followers.count}} 명</span>
+
+            <span>팔로우 {{target_user.followings.count}} 명</span>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+<hr>
+<div>
+  <a class="btn btn-outline-light" data-toggle="collapse" href="#collapseComment" role="button" aria-expanded="false" aria-controls="collapseComment">
+    작성한 댓글</br>
+  </a>
+
+    <div class="collapse" id="collapseComment">
+          <div>
+                <br>
+              <table class="table table-hover" style='color:white;'>
+                  <thead>
+                    <tr>
+                    <th scope="col">MOVIE TITLE</th>
+                    <th scope="col">COMMENT</th>
+                    <th scope="col">#</th>
+                    </tr>
+                  </thead>
+              <tbody>
+                {% for comment in comments %}
+                  <tr>
+                    <td><a href="{% url 'movies:detail' comment.movie.pk %}" style="color: white">{{ comment.movie.title }}</a></td>
+                    <td>{{comment.content }}</td>
+                    {% if user == target_user %}
+                    <td><a href="{% url 'movies:comment_delete' comment.movie.id comment.id %}">delete</a></td>
+                    {% endif %}
+                    {% endfor %}
+                  </tr>
+
+              </tbody>
+        </table>
+
+        </div>
+    </div>
+</div>
+<br>
+
+<div>
+  <a class="btn btn-outline-light" data-toggle="collapse" href="#collapseScore" role="button" aria-expanded="false" aria-controls="collapseScore">
+    점수를 준 영화</br>
+  </a>
+
+    <div class="collapse" id="collapseScore">
+          <div>
+                <br>
+              <table class="table table-hover" style='color:white;'>
+                <thead>
+                  <tr>
+                  <th scope="col">MOVIE TITLE</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for score_movie in score_movies %}
+                  <tr>
+                      <td><a href="{% url 'movies:detail' score_movie.pk %}" style="color: white">{{ score_movie.movie.title }}</a></td>
+                      <td style='color:white;'>{{ score_movie.score }}</td>
+                      {% if user == target_user %}
+                      <td><a href="{% url 'movies:score_delete' score_movie.movie.id score_movie.id %}">delete</a></td>
+                      {% endif %}
+ 
+                    {% endfor %}
+                  </tr>
+
+              </tbody>
+        </table>
+
+        </div>
+    </div>
+</div>
+<br>
+
+<p>
+  <a class="btn btn-outline-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">좋아하는 영화</a>
+  <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">싫어하는 영화</button>
+</p>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+            {% for like_movie in like_movies %}
+                <p style="color: black"><a href="{% url 'movies:detail' like_movie.pk %}" style="color: black">{{ like_movie.title }}</a>
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+        {% for hate_movie in hate_movies %}
+             <p style="color: black"><a href="{% url 'movies:detail' hate_movie.pk %}" style="color: black">{{ hate_movie.title }}</a></p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+</div>
+</div>

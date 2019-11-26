@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% load crispy_forms_tags %}
+    <div class="container" style="color:white;">
+        <form method="POST">
+            {% csrf_token %}
+            {{ login_form | crispy}}
+            <button type="button submit" class="btn btn-light">Log In</button>
+        </form>
+        <div class="d-flex justify-content-end"><p>reMon 회원이 아닌가요? <a href="{% url 'accounts:signup' %}">  지금 가입하세요</a></p></div>
+    </div>
+{% endblock %}

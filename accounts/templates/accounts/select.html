@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container my-5">
+        <h2 style="color: white;" class="text-center">영화를 선택해주세요 :)</h2>
+        <p style="color: white;" class="text-center">사진을 클릭해 평점을 남겨주세요</p>
+    </div>
+    <div class="container text-center myList">
+      <div class="row">
+          <div class="col-3 my-3" v-for="mov in movList">
+                <a :href=`http://minjin-movie-yeojineee.c9users.io:8080/movies/${mov.id}`><img :src="mov.poster_url" height="280vmin" width="230vmin"></a>
+          </div>
+      </div>
+      <i v-on:click="getList" class="fas fa-plus-circle fa-2x my-5" style="color: white;"></i>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const app = new Vue({
+            el: '.myList',
+            data: {
+                counter: 10,
+                movList: []
+                // movList: contacts
+            },
+            mounted: function() {
+                axios.get(`http://minjin-movie-yeojineee.c9users.io:8080/accounts/get_list/${this.counter}`)
+                .then(res=> {this.movList = res.data})
+            },
+            methods: {
+                getList: function() {
+                    this.counter += 10
+                    axios.get(`http://minjin-movie-yeojineee.c9users.io:8080/accounts/get_list/${this.counter}`)
+                    .then(res=> {this.movList = res.data})
+                }
+            }
+        })
+        
+        const selectNewScore = document.querySelector('.select-new-score')
+        selectNewScore.addEventListener('submit', function(event) {
+            event.preventDefault()
+            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+            axios.defaults.xsrfCookieName = 'csrftoken'
+            axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+            const url = event.target.getAttribute('action')
+            console.log(url)
+        //     const data = new FormData(event.target)
+        //     // const movieId
+        //     axios.post(url, data)
+        //         .then(function(response) {
+        //             console.log(response)
+        //         })
+        })
+        
+        function ShowSliderScore(sVal)
+        {
+        	var scoreView = document.getElementById("slider_score_view");
+        	scoreView.innerHTML = sVal
+        }
+        
+        var scoreRange = function(){
+        	var range = $('.score_range');
+            
+        	range.on('input', function(){		
+        		ShowSliderScore(this.value);
+        	});
+        };
+    
+    scoreRange();
+    </script>
+{% endblock %}

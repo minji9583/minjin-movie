@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h2 style="color: white;">"{{ actor.name }}"<span style="color: lightgrey;">님의 검색결과</span></h2>
+    <div class="row d-flex justify-content-center">
+        {% for act in actor.filmo.all %}
+            <div class="col-3 mx-4 card border-dark my-3" style="width: 18rem;">
+                  <a href="{% url 'movies:detail' act.pk %}"><img src="{{ act.poster_url }}" class="card-img-top" alt="{{ act.title }}" height="409"></a>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ act.title }}</h5>
+                    <p>AUDIENCE {{act.audience}} 명</p>
+                    <p>OPEN DATE {{ act.open_date}}</p>
+                    <p>DIRECTOR {{act.director}}</p>
+                  </div>
+            </div>
+    {% endfor %}
+        </div>
+{% endblock %}
